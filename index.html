@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sabah's Capital Game!</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link href="capital_game.css" rel="stylesheet" />
+    <link rel="stylesheet" href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css">
+    <link rel="stylesheet" href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.min.css">
+    <script type="text/javascript" src="jquery/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="capital_game.js"></script>
+    <script type="text/javascript" src="country_capital_pairs.js"></script>
+    <script type="text/javascript" src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
+  </head>
+  <body>
+    <!--Your code here-->
+    <div class="main">
+      <h3>Do you know the capital of this country?</h3>
+      <div id="map">
+            <!-- <iframe
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDRkBDFv-R1r8cGQi1WHAbFtQThtkxA_M8
+              &q=Space+Needle,Seattle+WA" maptype="roadmap">
+          </iframe> -->
+      </div>
+      <script>
+            function initMap(){
+              //Map options
+                var options = {
+                  zoom:8,
+                  center: {lat: 42.3601, lng: -71.0589}
+                }
+                //new map
+                var map = new google.maps.Map(document.getElementById('map'), options);
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content:'<h1>Lynn MA</h1>',
+                });
+            }
+      </script>
+      <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEFhA7YCRrOdDGFYIoX5ltqpvr67KlfFc&callback=initMap&v=weekly"
+      async>
+      </script>
+     
+      <table id=country>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Capital</th>
+            <th>Answer</th>
+          </tr>
+          <tr>
+            <td id= "pr2__question"></td>
+            <td><input id= "pr2__answer" class="ui-autocomplete"  type="text" placeholder="Your Answer" onclick="clickInput()"></td>
+            <td><button id= "pr2__submit" style="width:85px"onclick ="clickAnswer(document.getElementById('pr2__question').innerText,document.getElementById('pr2__answer').value)">See Answer</button></td>
+          </tr>
+          <tr>
+            <td>
+              <input id="all" type="radio"  checked name="historyFilter" value='all' onclick="check()">
+              <label for="all">All</label>
+            </td>
+            <td>
+              <input id="correct-only" type="radio"  name="historyFilter" value='correct' onclick="check()">
+              <label for="correct">Correct Only</label>
+            </td>
+            
+            <td>
+              <input id="wrong-only" type="radio" name="historyFilter" value='wrong' onclick="check()">
+              <label for="wrong">Wrong Only</label>
+            </td>
+          </tr>
+          <tr>
+            <td><button id="pr3_clear">Clear</button><button id="pr3_reset">Reset</button></td>
+          </tr>
+          
+          
+        </thead>
+        
+        <tbody id= "tBody">
+          <tr id="no_entry">
+            <td></td>
+            <td>No Entry To Show</td>
+            <td></td>
+          </tr>
+        </tbody>
+       
+      </table>
+    </div>
+    
+    <script>
+         // Get the input field
+         var input = document.getElementById("pr2__answer");
+
+   
+         // Execute a function when the user releases a key on the keyboard
+         input.addEventListener("keyup", function(event) {
+         // Number 13 is the "Enter" key on the keyboard
+         if (event.keyCode === 13) {
+              // Cancel the default action, if needed
+              event.preventDefault();
+              // Trigger the button element with a click
+              document.getElementById("pr2__submit").click();
+          }
+        });
+
+        var btnClear = document.getElementById("pr3_clear");
+        btnClear.addEventListener('click', function(){
+             input.value = "";
+        });
+
+        var btnReset = document.getElementById("pr3_reset");
+        btnReset.addEventListener('click', function(){
+          $( document ).ready(function() {
+
+                var country_capital_pairs = pairs;
+
+                document.getElementById('pr2__answer').value = "";
+                var question  = getRandomQuestion(country_capital_pairs);
+                document.getElementById('pr2__question').innerText = question;
+                document.getElementById('no_entry').style.display = 'block'; 
+
+                });
+
+               
+        })
+
+       
+    </script>
+  </body>
+</html>
