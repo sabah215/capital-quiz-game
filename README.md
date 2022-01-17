@@ -1,1 +1,1 @@
-# capital-quiz-game
+# Capital-quiz-game
